@@ -3,7 +3,11 @@
 
 using namespace std;
 
-vector<int> z_algo (string& text, string& pattern) {
+// a a b c a a b x a a z
+// a a b c a a b x a a z
+// 0 1 0 0 3 1 0 0 2 1 0
+
+vector<int> z_algo (string& text) {
 
 	int n = text.size();
 
@@ -19,7 +23,7 @@ vector<int> z_algo (string& text, string& pattern) {
 			l = i;
 			r = i;
 
-			while (r < n && text[r] == pattern[r - l]) {
+			while (r < n && text[r] == text[r - l]) {
 				r++;
 			}
 			z_array[i] = r - l;
@@ -32,7 +36,7 @@ vector<int> z_algo (string& text, string& pattern) {
 				z_array[i] = z_array[k];
 			} else {
 				l = i;
-				while (r < n && text[r] == pattern[r - l]) {
+				while (r < n && text[r] == text[r - l]) {
 					r++;
 				}
 				z_array[i] = r - l;
@@ -54,7 +58,7 @@ int main() {
 	string cand = pattern + '$' + text;
 
 
-	vector<int> sol = z_algo(cand, pattern);
+	vector<int> sol = z_algo(cand);
 
 	for (int i = 0; i < sol.size(); ++i) {
 		cout<<sol[i]<<" ";
